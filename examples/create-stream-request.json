@@ -1,0 +1,22 @@
+{
+  "type": 0,
+  "genesis": {
+    "header": {
+      "controllers": [
+        "did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK"
+      ],
+      "family": "IDX",
+      "schema": "ceramic://kjzl6cwe1jw14b1d9aq7gyp38iqrfodmhgjroxuv8v7v3kf5n37psmcg7a5dpb"
+    },
+    "content": {
+      "name": "Alice Doe",
+      "description": "Decentralized identity enthusiast",
+      "url": "https://alice.example.com"
+    }
+  },
+  "opts": {
+    "anchor": true,
+    "publish": true,
+    "sync": 1
+  }
+}

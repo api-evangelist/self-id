@@ -135,6 +135,8 @@ apis:
     properties:
       - type: Documentation
         url: https://developers.ceramic.network/docs/protocol/js-ceramic/guides/ceramic-clients/javascript-clients/http-api
+      - type: OpenAPI
+        url: openapi/ceramic-http-api.json
       - type: x-npm-package
         url: https://www.npmjs.com/package/@ceramicnetwork/http-client
       - type: x-github
@@ -147,4 +149,5 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
     url: https://apievangelist.com
+modified: '2026-06-14'
 specificationVersion: '0.19'

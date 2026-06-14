@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/ceramicstudio/self.id/main/packages/core/src/schemas/basicProfile.json",
+  "title": "BasicProfile",
+  "description": "Self.ID basic profile record schema — the primary identity record stored on Ceramic for a DID. Contains human-readable identity information such as name, bio, and avatar.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 150,
+      "description": "The display name of the DID subject"
+    },
+    "image": {
+      "$ref": "#/$defs/ImageSources",
+      "description": "Profile image sources"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 420,
+      "description": "A short biography or description of the DID subject"
+    },
+    "emoji": {
+      "type": "string",
+      "maxLength": 2,
+      "description": "An optional emoji to represent this profile"
+    },
+    "background": {
+      "$ref": "#/$defs/ImageSources",
+      "description": "Background/cover image sources"
+    },
+    "birthDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of birth in ISO 8601 format (YYYY-MM-DD)"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 240,
+      "description": "Personal or organizational website URL"
+    },
+    "gender": {
+      "type": "string",
+      "maxLength": 42,
+      "description": "Self-described gender identity"
+    },
+    "residenceCountry": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}$",
+      "description": "ISO 3166-1 alpha-2 country code of residence"
+    },
+    "nationalities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]{2}$"
+      },
+      "maxItems": 5,
+      "description": "List of ISO 3166-1 alpha-2 country codes representing nationalities"
+    },
+    "affiliations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 140
+      },
+      "maxItems": 20,
+      "description": "List of organizational or community affiliations"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "ImageSources": {
+      "type": "object",
+      "title": "ImageSources",
+      "description": "A set of image alternatives at different sizes/formats",
+      "properties": {
+        "original": {
+          "$ref": "#/$defs/ImageMetadata",
+          "description": "The original/primary image"
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ImageMetadata"
+          },
+          "description": "Alternative sizes or formats of the image"
+        }
+      },
+      "required": ["original"]
+    },
+    "ImageMetadata": {
+      "type": "object",
+      "title": "ImageMetadata",
+      "description": "Metadata for a single image resource stored on IPFS",
+      "properties": {
+        "src": {
+          "type": "string",
+          "description": "IPFS URL of the image (ipfs://...)",
+          "pattern": "^ipfs://.+"
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "MIME type of the image (e.g. image/jpeg)",
+          "example": "image/jpeg"
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Width of the image in pixels"
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Height of the image in pixels"
+        },
+        "size": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "File size in bytes"
+        }
+      },
+      "required": ["src", "mimeType", "width", "height"]
+    }
+  }
+}

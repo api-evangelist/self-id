@@ -1,0 +1,12 @@
+{
+  "queries": [
+    {
+      "streamId": "kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t",
+      "paths": ["link"]
+    },
+    {
+      "streamId": "kjzl6cwe1jw14b9pq2o1bvmxzpbz8y3y6r5l9q3v2k7",
+      "paths": []
+    }
+  ]
+}

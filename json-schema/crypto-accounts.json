@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/ceramicstudio/self.id/main/packages/core/src/schemas/cryptoAccounts.json",
+  "title": "CryptoAccounts",
+  "description": "Self.ID crypto accounts record schema — maps CAIP-10 blockchain account addresses to Ceramic stream IDs proving ownership. Enables a DID to publicly link their Ethereum (or other chain) addresses.",
+  "type": "object",
+  "description": "A map of CAIP-10 account identifiers to Ceramic StreamIDs (CAIP-10Link streams proving account ownership)",
+  "additionalProperties": {
+    "type": "string",
+    "description": "StreamID of the CAIP-10Link proving ownership of the corresponding blockchain account",
+    "pattern": "^ceramic://.+"
+  },
+  "examples": [
+    {
+      "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb": "ceramic://kjzl6cwe1jw14bm2sqmfzlaq3mvnb5t2b27ufbm9k4hdozhqmrg0ys4e9prbwz2"
+    }
+  ]
+}

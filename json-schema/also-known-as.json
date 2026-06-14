@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/ceramicstudio/self.id/main/packages/core/src/schemas/alsoKnownAs.json",
+  "title": "AlsoKnownAs",
+  "description": "Self.ID alsoKnownAs record schema — links a DID to external Web2 accounts (Twitter, GitHub, Discord, etc.) with cryptographic proofs, following the DIF AlsoKnownAs specification.",
+  "type": "object",
+  "properties": {
+    "accounts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Account"
+      },
+      "maxItems": 200,
+      "description": "List of linked external accounts with verification proofs"
+    }
+  },
+  "required": ["accounts"],
+  "$defs": {
+    "Account": {
+      "type": "object",
+      "title": "Account",
+      "description": "A single linked external account",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Protocol or platform identifier (e.g. 'https', 'twitter', 'github')",
+          "examples": ["https", "twitter", "github", "discord"]
+        },
+        "host": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "Hostname for the service (e.g. 'twitter.com')",
+          "examples": ["twitter.com", "github.com"]
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "Account identifier (username, user ID, or profile URL path)",
+          "examples": ["@alice", "alice", "123456789"]
+        },
+        "claim": {
+          "type": "string",
+          "format": "uri",
+          "maxLength": 300,
+          "description": "Optional URL pointing to the public attestation or verification claim"
+        },
+        "attestations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Attestation"
+          },
+          "maxItems": 50,
+          "description": "Cryptographic attestations proving account ownership"
+        }
+      },
+      "required": ["protocol", "id"],
+      "additionalProperties": false
+    },
+    "Attestation": {
+      "type": "object",
+      "title": "Attestation",
+      "description": "A cryptographic proof of account ownership, typically a signed JSON-LD credential",
+      "properties": {
+        "did-jwt-vc": {
+          "type": "string",
+          "description": "A DID JWT verifiable credential attesting account ownership"
+        }
+      },
+      "additionalProperties": {
+        "type": "string"
+      },
+      "minProperties": 1
+    }
+  }
+}

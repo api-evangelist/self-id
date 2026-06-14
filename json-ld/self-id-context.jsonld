@@ -1,0 +1,135 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "did": "https://www.w3.org/ns/did#",
+    "ceramic": "https://ceramic.network/vocab#",
+    "selfid": "https://self.id/vocab#",
+
+    "BasicProfile": {
+      "@id": "selfid:BasicProfile",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "image": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "background": {
+          "@id": "selfid:backgroundImage",
+          "@type": "@id"
+        },
+        "emoji": "selfid:emoji",
+        "gender": "schema:gender",
+        "birthDate": {
+          "@id": "schema:birthDate",
+          "@type": "xsd:date"
+        },
+        "residenceCountry": "schema:addressCountry",
+        "nationalities": {
+          "@id": "schema:nationality",
+          "@container": "@set"
+        },
+        "affiliations": {
+          "@id": "schema:affiliation",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "ImageSources": {
+      "@id": "selfid:ImageSources",
+      "@context": {
+        "original": "selfid:originalImage",
+        "alternatives": {
+          "@id": "selfid:alternativeImage",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "ImageMetadata": {
+      "@id": "selfid:ImageMetadata",
+      "@context": {
+        "src": {
+          "@id": "schema:contentUrl",
+          "@type": "@id"
+        },
+        "mimeType": "schema:encodingFormat",
+        "width": {
+          "@id": "schema:width",
+          "@type": "xsd:integer"
+        },
+        "height": {
+          "@id": "schema:height",
+          "@type": "xsd:integer"
+        },
+        "size": {
+          "@id": "schema:contentSize",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "CryptoAccounts": {
+      "@id": "selfid:CryptoAccounts",
+      "@context": {
+        "caip10": {
+          "@id": "selfid:caip10Account",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "AlsoKnownAs": {
+      "@id": "selfid:AlsoKnownAs",
+      "@context": {
+        "accounts": {
+          "@id": "selfid:linkedAccount",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Account": {
+      "@id": "selfid:Account",
+      "@context": {
+        "protocol": "selfid:protocol",
+        "host": "selfid:host",
+        "id": "@id",
+        "claim": {
+          "@id": "selfid:claim",
+          "@type": "@id"
+        },
+        "attestations": {
+          "@id": "selfid:attestation",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Stream": {
+      "@id": "ceramic:Stream",
+      "@context": {
+        "streamId": "ceramic:streamId",
+        "type": "ceramic:streamType",
+        "content": "ceramic:content",
+        "metadata": "ceramic:metadata",
+        "controllers": {
+          "@id": "ceramic:controller",
+          "@container": "@set"
+        },
+        "anchorStatus": "ceramic:anchorStatus",
+        "log": {
+          "@id": "ceramic:commitLog",
+          "@container": "@list"
+        }
+      }
+    }
+  }
+}
