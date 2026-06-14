@@ -1,0 +1,35 @@
+rateLimits:
+  published: false
+  notes: >-
+    Self.ID and the underlying Ceramic HTTP API do not publish formal rate limits. The SDK
+    communicates with Ceramic nodes (self-hosted or community gateways) over standard HTTP.
+    Rate limiting, if any, is enforced at the individual node level by the node operator
+    and is not documented publicly by the Self.ID project or Ceramic Network.
+  knownConstraints:
+    - name: Community gateway nodes
+      description: >-
+        The publicly accessible gateways (gateway.ceramic.network,
+        gateway-clay.ceramic.network, ceramic-clay.3boxlabs.com) are community-operated
+        and may apply undocumented connection or request throttling at the operator's
+        discretion. They are not intended for production high-volume usage.
+      limit: undocumented
+      scope: per-IP / per-node-operator
+    - name: Self-hosted node
+      description: >-
+        When running a local Ceramic node (default: http://localhost:7007), rate limits
+        are set by the node software defaults and the host machine's resources. No
+        published cap exists in the default configuration.
+      limit: resource-bound
+      scope: per-node
+    - name: Tile document writes
+      description: >-
+        Anchor requests (committing stream updates to a blockchain) are subject to the
+        Ceramic anchor service (CAS) throughput. The CAS batches anchors periodically and
+        is not a synchronous per-request operation.
+      limit: batch-based
+      scope: per-CAS-batch-cycle
+references:
+  - title: Ceramic HTTP API documentation
+    url: https://developers.ceramic.network/docs/protocol/js-ceramic/guides/ceramic-clients/javascript-clients/http-api
+  - title: Self.ID SDK overview
+    url: https://developers.ceramic.network/tools/self-id/overview/

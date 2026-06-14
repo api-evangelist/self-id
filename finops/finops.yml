@@ -1,0 +1,48 @@
+finops:
+  model: open-source-self-hosted
+  summary: >-
+    Self.ID has no direct API usage fees. Cost is incurred through infrastructure choices:
+    self-hosting a Ceramic node or relying on community gateways. The primary indirect cost
+    is blockchain anchor fees (Ethereum/IPFS transaction gas) when writing records to the
+    Ceramic mainnet. Development and testing on the Clay testnet carry no on-chain costs.
+  costDrivers:
+    - name: Ceramic node hosting
+      description: >-
+        Running a Ceramic node (js-ceramic) requires a server. Cloud VM costs depend on
+        provider and instance size. A minimal node can run on a small VM (1-2 vCPU, 1-2 GB RAM).
+      estimatedCost: Variable — depends on cloud provider; typically $5-$50/month for a small VM
+      unit: per month
+    - name: Anchor service (CAS) fees
+      description: >-
+        When stream updates are committed to the Ceramic mainnet, the Ceramic Anchor Service
+        batches them and writes an Ethereum transaction. Costs depend on Ethereum gas prices
+        at the time of anchoring. Testnet (Clay) anchoring is free.
+      estimatedCost: Variable — Ethereum gas cost per anchor batch (shared across multiple streams)
+      unit: per anchor batch
+    - name: IPFS storage
+      description: >-
+        Ceramic streams are stored on IPFS. Pinning data on IPFS for persistence may incur
+        costs through a pinning service (e.g., Pinata, Infura IPFS). Self-hosting IPFS is free
+        beyond infrastructure.
+      estimatedCost: Free (self-hosted) or ~$0.15/GB/month (managed pinning services)
+      unit: per GB per month
+    - name: 3ID Connect
+      description: >-
+        3ID Connect is the browser-based DID authentication provider used by @self.id/web.
+        It is free and open-source; no usage fees apply for calling the 3ID Connect service.
+      estimatedCost: Free
+      unit: per authentication
+  savingsTips:
+    - Use the Clay testnet for all development and integration testing to avoid mainnet gas costs.
+    - Share a Ceramic node across multiple applications to amortize hosting costs.
+    - Leverage community gateway nodes (gateway.ceramic.network) for read-only operations to
+      avoid running your own node for read-heavy workloads.
+    - Batch write operations where possible to reduce the number of anchor transactions and
+      associated gas fees.
+  references:
+    - title: Self.ID GitHub repository (open-source, MIT/Apache 2)
+      url: https://github.com/ceramicstudio/self.id
+    - title: Ceramic Network
+      url: https://ceramic.network
+    - title: Running a Ceramic node
+      url: https://developers.ceramic.network/docs/protocol/js-ceramic/guides/ceramic-clients/javascript-clients/http-api

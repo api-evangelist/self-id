@@ -1,0 +1,38 @@
+plans:
+  - name: Open Source / Self-Hosted
+    description: >-
+      Self.ID SDK and the Ceramic node software are fully open-source (MIT/Apache 2 dual license).
+      Developers can run their own Ceramic node at no cost, connecting to the Ceramic mainnet or
+      Clay testnet. There are no subscription fees for using the SDK packages or connecting to
+      community-run gateway nodes.
+    url: https://github.com/ceramicstudio/self.id
+    price: free
+    priceCurrency: USD
+    features:
+      - Full Self.ID SDK access (@self.id/core, web, react, framework)
+      - Ceramic mainnet gateway access (read-only, rate-limited by operator)
+      - Clay testnet gateway access for development
+      - Run your own Ceramic node (http://localhost:7007)
+      - No API keys required for read-only gateway access
+      - Open-source under MIT and Apache 2 licenses
+  - name: 3Box Labs / Ceramic Hosted Node (Community)
+    description: >-
+      3Box Labs and the Ceramic community operate hosted gateway nodes for the mainnet and Clay
+      testnet. Access is publicly available without authentication for read operations. Write
+      operations require a DID-authenticated client; there is no formal SLA or commercial plan
+      for hosted gateway usage, and availability may vary.
+    url: https://ceramic.network
+    price: free
+    priceCurrency: USD
+    features:
+      - Mainnet read gateway at https://gateway.ceramic.network
+      - Clay testnet gateway at https://gateway-clay.ceramic.network
+      - Clay testnet read/write node at https://ceramic-clay.3boxlabs.com
+      - Community-supported uptime
+      - No formal rate-limit SLA published
+notes: >-
+  As of 2024, Self.ID (maintained by Ceramic Studio / 3Box Labs) does not offer a commercial
+  hosted-API pricing tier with formal plans, SLAs, or published rate limits. The project is
+  open-source and relies on self-hosted nodes or community-operated gateways. Commercial hosting
+  options for Ceramic nodes are available through cloud providers, but are independent of the
+  Self.ID project itself.

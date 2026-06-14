@@ -1,0 +1,150 @@
+name: Self.ID
+description: >-
+  Self.ID is a Ceramic-based decentralized identity framework providing SDK packages and
+  REST-compatible APIs for managing DID profiles, verifiable credentials, and self-sovereign
+  identity data on the Ceramic network. It supports Ethereum-based authentication via 3ID Connect
+  and enables reading and writing identity records such as basic profiles, linked crypto accounts,
+  and linked Web2 accounts. The SDK is organized in layered packages (core, web, react, framework)
+  targeting both Node.js and browser environments.
+image: https://self.id/favicon.ico
+tags:
+  - Decentralized Identity
+  - DID
+  - Ceramic
+  - Self-Sovereign Identity
+  - Web3
+  - Verifiable Credentials
+  - Blockchain
+url: https://self.id
+apis:
+  - name: Self.ID Core API
+    description: >-
+      Read public DID profile records in Node and browser environments. Provides the Core and
+      PublicID classes for retrieving records (basicProfile, linked crypto accounts, linked Web2
+      accounts) associated with a DID or CAIP-10 account on any Ceramic network node.
+    humanURL: https://developers.ceramic.network/tools/self-id/overview/
+    baseURL: https://gateway.ceramic.network
+    tags:
+      - DID
+      - Profile
+      - Read-Only
+      - Ceramic
+    properties:
+      - type: Documentation
+        url: https://developers.ceramic.network/tools/self-id/overview/
+      - type: OpenAPI
+        url: https://github.com/ceramicstudio/self.id/blob/main/packages/core/src/index.ts
+      - type: x-npm-package
+        url: https://www.npmjs.com/package/@self.id/core
+      - type: x-github
+        url: https://github.com/ceramicstudio/self.id/tree/main/packages/core
+    contact:
+      - FN: Ceramic Network
+        email: ''
+        url: https://ceramic.network
+  - name: Self.ID Web API
+    description: >-
+      Read and write DID identity records in browser environments. Exports WebClient and SelfID
+      classes enabling Ethereum-based authentication via 3ID Connect, then get/set/merge operations
+      on records (basicProfile, cryptoAccounts, alsoKnownAs) anchored to the authenticated DID on
+      a Ceramic node.
+    humanURL: https://developers.ceramic.network/tools/self-id/write/
+    baseURL: https://ceramic-clay.3boxlabs.com
+    tags:
+      - DID
+      - Profile
+      - Read-Write
+      - Authentication
+      - Ethereum
+      - Ceramic
+    properties:
+      - type: Documentation
+        url: https://developers.ceramic.network/tools/self-id/write/
+      - type: x-npm-package
+        url: https://www.npmjs.com/package/@self.id/web
+      - type: x-github
+        url: https://github.com/ceramicstudio/self.id/tree/main/packages/web
+    contact:
+      - FN: Ceramic Network
+        email: ''
+        url: https://ceramic.network
+  - name: Self.ID React API
+    description: >-
+      React hooks and utilities for Ceramic-based DID authentication and record interactions.
+      Provides useViewerRecord, usePublicRecord, useViewerConnection, and related hooks so React
+      applications can connect an Ethereum wallet, authenticate a DID, and reactively read or write
+      identity profile data.
+    humanURL: https://developers.ceramic.network/tools/self-id/overview/
+    baseURL: https://ceramic-clay.3boxlabs.com
+    tags:
+      - DID
+      - React
+      - Hooks
+      - Authentication
+      - Ceramic
+    properties:
+      - type: Documentation
+        url: https://developers.ceramic.network/reference/self-id/modules/react/
+      - type: x-npm-package
+        url: https://www.npmjs.com/package/@self.id/react
+      - type: x-github
+        url: https://github.com/ceramicstudio/self.id/tree/main/packages/react
+    contact:
+      - FN: Ceramic Network
+        email: ''
+        url: https://ceramic.network
+  - name: Self.ID Framework API
+    description: >-
+      Highest-level React framework abstraction for decentralized identity apps built on Ceramic.
+      Wraps the core, web, and react packages into a single Provider + hooks surface
+      (useViewerConnection, useViewerRecord, usePublicRecord) to quickly bootstrap authentication,
+      state management, and DID data access in React applications.
+    humanURL: https://developers.ceramic.network/tools/self-id/overview/
+    baseURL: https://ceramic-clay.3boxlabs.com
+    tags:
+      - DID
+      - React
+      - Framework
+      - Authentication
+      - Ceramic
+    properties:
+      - type: Documentation
+        url: https://developers.ceramic.network/reference/self-id/modules/framework/
+      - type: x-npm-package
+        url: https://www.npmjs.com/package/@self.id/framework
+      - type: x-github
+        url: https://github.com/ceramicstudio/self.id/tree/main/packages/framework
+    contact:
+      - FN: Ceramic Network
+        email: ''
+        url: https://ceramic.network
+  - name: Ceramic HTTP API
+    description: >-
+      Low-level REST HTTP API for the Ceramic node (js-ceramic), providing the underlying transport
+      for all Self.ID SDK operations. Exposes endpoints to create/load streams by StreamID or
+      CommitID, batch-load streams via multiQuery, manage anchoring and pinning, and access the
+      Data Feed for custom indexers. Used internally by @ceramicnetwork/http-client.
+    humanURL: https://developers.ceramic.network/docs/protocol/js-ceramic/guides/ceramic-clients/javascript-clients/http-api
+    baseURL: https://gateway.ceramic.network
+    tags:
+      - REST
+      - Streams
+      - DID
+      - Ceramic
+      - HTTP
+    properties:
+      - type: Documentation
+        url: https://developers.ceramic.network/docs/protocol/js-ceramic/guides/ceramic-clients/javascript-clients/http-api
+      - type: x-npm-package
+        url: https://www.npmjs.com/package/@ceramicnetwork/http-client
+      - type: x-github
+        url: https://github.com/ceramicnetwork/js-ceramic
+    contact:
+      - FN: Ceramic Network
+        email: ''
+        url: https://ceramic.network
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+specificationVersion: '0.19'
