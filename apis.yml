@@ -151,3 +151,8 @@ maintainers:
     url: https://apievangelist.com
 modified: '2026-06-14'
 specificationVersion: '0.19'
+common:
+  - type: DomainSecurity
+    url: security/self-id-domain-security.yml
+  - url: https://blog.ceramic.network/feed/
+    type: Blog
