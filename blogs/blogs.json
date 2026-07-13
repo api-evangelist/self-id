@@ -1,0 +1,14 @@
+{
+  "repo": "self-id",
+  "feeds": [
+    {
+      "source": "https://blog.ceramic.network/feed/",
+      "feed_url": "https://blog.ceramic.network/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 15
+}
