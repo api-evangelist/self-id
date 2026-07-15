@@ -152,6 +152,8 @@ maintainers:
 modified: '2026-06-14'
 specificationVersion: '0.19'
 common:
+  - type: AgenticAccess
+    url: agentic-access/self-id-agentic-access.yml
   - type: DomainSecurity
     url: security/self-id-domain-security.yml
   - url: https://blog.ceramic.network/feed/
