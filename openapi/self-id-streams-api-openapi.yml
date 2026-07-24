@@ -1,0 +1,230 @@
+openapi: 3.0.3
+info:
+  title: Ceramic HTTP Commits Streams API
+  description: Low-level REST HTTP API for the Ceramic node (js-ceramic), providing the underlying transport for all Self.ID SDK operations. Exposes endpoints to create/load streams by StreamID or CommitID, batch-load streams via multiQuery, manage anchoring and pinning, and access the Data Feed for custom indexers.
+  version: 0.1.0
+  contact:
+    name: Ceramic Network
+    url: https://ceramic.network
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://gateway.ceramic.network
+  description: Ceramic Gateway (read-only)
+- url: https://ceramic-clay.3boxlabs.com
+  description: Clay testnet node
+tags:
+- name: Streams
+  description: Create and load Ceramic streams by StreamID or CommitID
+paths:
+  /api/v0/streams:
+    post:
+      tags:
+      - Streams
+      summary: Create Stream
+      description: Creates a new Ceramic stream with a genesis commit. Returns the new StreamID and initial state.
+      operationId: createStream
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStreamRequest'
+            example:
+              type: 0
+              genesis:
+                header:
+                  controllers:
+                  - did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK
+                content:
+                  name: Alice
+                  description: My decentralized profile
+      responses:
+        '200':
+          description: Stream created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamState'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v0/streams/{streamId}:
+    get:
+      tags:
+      - Streams
+      summary: Get Stream
+      description: Loads a Ceramic stream by its StreamID. Optionally load a specific commit using a CommitID.
+      operationId: getStream
+      parameters:
+      - name: streamId
+        in: path
+        required: true
+        description: The StreamID or CommitID of the stream to load
+        schema:
+          type: string
+          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
+      responses:
+        '200':
+          description: Stream state retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamState'
+        '404':
+          description: Stream not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    CreateStreamRequest:
+      type: object
+      required:
+      - type
+      - genesis
+      properties:
+        type:
+          type: integer
+          description: Stream type identifier (0 = TileDocument, 1 = CAIP-10Link, 3 = Model, 4 = ModelInstanceDocument)
+          example: 0
+        genesis:
+          $ref: '#/components/schemas/GenesisCommit'
+        opts:
+          $ref: '#/components/schemas/StreamOptions'
+    StreamState:
+      type: object
+      description: The current state of a Ceramic stream
+      properties:
+        streamId:
+          type: string
+          description: The unique StreamID
+          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
+        state:
+          type: object
+          properties:
+            type:
+              type: integer
+              description: Stream type identifier
+              example: 0
+            content:
+              description: Current content of the stream
+              example:
+                name: Alice
+                description: My decentralized profile
+            metadata:
+              type: object
+              description: Stream metadata
+              properties:
+                controllers:
+                  type: array
+                  items:
+                    type: string
+                schema:
+                  type: string
+                  nullable: true
+                family:
+                  type: string
+                  nullable: true
+            signature:
+              type: integer
+              description: 'Signature status: 0=genesis unsigned, 1=genesis signed, 2=signed'
+              enum:
+              - 0
+              - 1
+              - 2
+            anchorStatus:
+              type: integer
+              description: 'Anchoring status: 0=not requested, 1=pending, 2=processing, 3=anchored, 4=failed'
+              enum:
+              - 0
+              - 1
+              - 2
+              - 3
+              - 4
+            log:
+              type: array
+              description: Ordered list of CIDs representing the commit log
+              items:
+                type: object
+                properties:
+                  cid:
+                    type: string
+                  type:
+                    type: integer
+            next:
+              type: object
+              nullable: true
+              description: Pending content not yet anchored
+    StreamOptions:
+      type: object
+      description: Optional stream operation configuration
+      properties:
+        anchor:
+          type: boolean
+          description: Whether to request an anchor for this commit
+          default: true
+        publish:
+          type: boolean
+          description: Whether to publish the commit to the Ceramic network
+          default: true
+        sync:
+          type: integer
+          description: 'Sync policy: 0=never, 1=prefer cache, 2=always sync'
+          enum:
+          - 0
+          - 1
+          - 2
+          default: 1
+    CommitHeader:
+      type: object
+      properties:
+        controllers:
+          type: array
+          description: DID or CAIP-10 account strings that control this stream
+          items:
+            type: string
+          example:
+          - did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK
+        family:
+          type: string
+          description: Optional schema family identifier for grouping streams
+        schema:
+          type: string
+          description: Optional CommitID of the schema stream to validate content against
+        tags:
+          type: array
+          description: Optional tags for categorizing the stream
+          items:
+            type: string
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message
+    GenesisCommit:
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/CommitHeader'
+        content:
+          description: Initial content of the stream (stream-type dependent)
+          nullable: true

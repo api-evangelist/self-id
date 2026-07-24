@@ -1,0 +1,150 @@
+openapi: 3.0.3
+info:
+  title: Ceramic HTTP Commits Pins API
+  description: Low-level REST HTTP API for the Ceramic node (js-ceramic), providing the underlying transport for all Self.ID SDK operations. Exposes endpoints to create/load streams by StreamID or CommitID, batch-load streams via multiQuery, manage anchoring and pinning, and access the Data Feed for custom indexers.
+  version: 0.1.0
+  contact:
+    name: Ceramic Network
+    url: https://ceramic.network
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://gateway.ceramic.network
+  description: Ceramic Gateway (read-only)
+- url: https://ceramic-clay.3boxlabs.com
+  description: Clay testnet node
+tags:
+- name: Pins
+  description: Manage persistent pinning of streams on the local node
+paths:
+  /api/v0/pins/{streamId}:
+    get:
+      tags:
+      - Pins
+      summary: Get Pin Status
+      description: Retrieves the pinning status of a stream on the local Ceramic node.
+      operationId: getPinStatus
+      parameters:
+      - name: streamId
+        in: path
+        required: true
+        description: The StreamID to check pin status for
+        schema:
+          type: string
+          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
+      responses:
+        '200':
+          description: Pin status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PinStatusResponse'
+        '404':
+          description: Stream not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+      - Pins
+      summary: Pin Stream
+      description: Pins a stream to the local Ceramic node, ensuring it is persistently stored and not garbage collected.
+      operationId: pinStream
+      parameters:
+      - name: streamId
+        in: path
+        required: true
+        description: The StreamID to pin
+        schema:
+          type: string
+          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
+      responses:
+        '200':
+          description: Stream pinned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PinResponse'
+        '400':
+          description: Invalid stream ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - Pins
+      summary: Unpin Stream
+      description: Removes the pin for a stream from the local Ceramic node, allowing it to be garbage collected.
+      operationId: unpinStream
+      parameters:
+      - name: streamId
+        in: path
+        required: true
+        description: The StreamID to unpin
+        schema:
+          type: string
+          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
+      responses:
+        '200':
+          description: Stream unpinned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PinResponse'
+        '404':
+          description: Stream not pinned or not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    PinStatusResponse:
+      type: object
+      properties:
+        streamId:
+          type: string
+          description: The StreamID
+          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
+        pinnedStreamIds:
+          type: array
+          description: List of pinned StreamIDs (contains the requested ID if pinned)
+          items:
+            type: string
+    PinResponse:
+      type: object
+      properties:
+        streamId:
+          type: string
+          description: The StreamID that was pinned or unpinned
+          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
+        isPinned:
+          type: boolean
+          description: Whether the stream is now pinned
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message

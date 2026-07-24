@@ -1,0 +1,80 @@
+openapi: 3.0.3
+info:
+  title: Ceramic HTTP Commits Node API
+  description: Low-level REST HTTP API for the Ceramic node (js-ceramic), providing the underlying transport for all Self.ID SDK operations. Exposes endpoints to create/load streams by StreamID or CommitID, batch-load streams via multiQuery, manage anchoring and pinning, and access the Data Feed for custom indexers.
+  version: 0.1.0
+  contact:
+    name: Ceramic Network
+    url: https://ceramic.network
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: https://gateway.ceramic.network
+  description: Ceramic Gateway (read-only)
+- url: https://ceramic-clay.3boxlabs.com
+  description: Clay testnet node
+tags:
+- name: Node
+  description: Node health and configuration information
+paths:
+  /api/v0/node/healthcheck:
+    get:
+      tags:
+      - Node
+      summary: Node Healthcheck
+      description: Verifies the Ceramic node is operational and ready to serve requests.
+      operationId: nodeHealthcheck
+      responses:
+        '200':
+          description: Node is healthy
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Alive!
+        '503':
+          description: Node is not healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v0/node/chains:
+    get:
+      tags:
+      - Node
+      summary: Supported Chains
+      description: Lists the blockchain networks (CAIP-2 chain IDs) supported by this Ceramic node for anchoring.
+      operationId: getSupportedChains
+      responses:
+        '200':
+          description: List of supported chain IDs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SupportedChainsResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    SupportedChainsResponse:
+      type: object
+      properties:
+        supportedChains:
+          type: array
+          description: CAIP-2 chain IDs supported by this node for anchoring
+          items:
+            type: string
+          example:
+          - eip155:1
+          - eip155:5
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message
