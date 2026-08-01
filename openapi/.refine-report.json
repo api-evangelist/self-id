@@ -1,0 +1,22 @@
+{
+  "provider": "self-id",
+  "sources": [
+    "self-id-commits-api-openapi.yml",
+    "self-id-multiqueries-api-openapi.yml",
+    "self-id-node-api-openapi.yml",
+    "self-id-pins-api-openapi.yml",
+    "self-id-streams-api-openapi.yml"
+  ],
+  "outputs": [
+    "self-id-commits-api-openapi.yml",
+    "self-id-multiqueries-api-openapi.yml",
+    "self-id-node-api-openapi.yml",
+    "self-id-pins-api-openapi.yml",
+    "self-id-streams-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
