@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ceramic HTTP Commits Streams API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.ceramic.network/api/v0/streams",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Ceramic stream with a genesis commit. Returns the new StreamID and initial state."
+        },
+        {
+          "info": {
+            "name": "Get Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.ceramic.network/api/v0/streams/:streamId",
+            "params": [
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "The StreamID or CommitID of the stream to load"
+              }
+            ]
+          },
+          "docs": "Loads a Ceramic stream by its StreamID. Optionally load a specific commit using a CommitID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

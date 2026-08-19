@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ceramic HTTP Commits Node API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Node",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Node Healthcheck",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.ceramic.network/api/v0/node/healthcheck"
+          },
+          "docs": "Verifies the Ceramic node is operational and ready to serve requests."
+        },
+        {
+          "info": {
+            "name": "Supported Chains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.ceramic.network/api/v0/node/chains"
+          },
+          "docs": "Lists the blockchain networks (CAIP-2 chain IDs) supported by this Ceramic node for anchoring."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

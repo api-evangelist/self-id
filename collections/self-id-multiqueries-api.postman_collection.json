@@ -1,0 +1,217 @@
+{
+  "item": [
+    {
+      "id": "1ee2f9b9-b5ae-4c52-9a8f-070e7b6dfcb5",
+      "name": "Multiqueries",
+      "description": {
+        "content": "Batch-load multiple streams in a single request",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6f0ba031-4e77-48c2-86fc-18018c4f93d9",
+          "name": "Multi-Query Streams",
+          "request": {
+            "name": "Multi-Query Streams",
+            "description": {
+              "content": "Batch-loads multiple streams in a single request. Each query specifies a StreamID and optional paths to related streams to load simultaneously.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v0",
+                "multiqueries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"queries\": [\n    {\n      \"streamId\": \"<string>\",\n      \"paths\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"atTime\": \"<integer>\"\n    },\n    {\n      \"streamId\": \"<string>\",\n      \"paths\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"atTime\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "10fd5558-b1a4-4b52-82fc-d2fa6ac3e3d3",
+              "name": "Streams retrieved successfully. Returns a map of StreamID to stream state.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v0",
+                    "multiqueries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"queries\": [\n    {\n      \"streamId\": \"kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t\",\n      \"paths\": [\n        \"link\"\n      ]\n    },\n    {\n      \"streamId\": \"kjzl6cwe1jw14b9pq2o1bvmxzpbz8y3y6r5l9q3v2k7\",\n      \"paths\": []\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"streamId\": \"kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t\",\n    \"state\": {\n      \"type\": 0,\n      \"content\": {},\n      \"metadata\": {\n        \"controllers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"schema\": \"string\",\n        \"family\": \"string\"\n      },\n      \"signature\": 1,\n      \"anchorStatus\": 4,\n      \"log\": [\n        {\n          \"cid\": \"string\",\n          \"type\": 8126\n        },\n        {\n          \"cid\": \"string\",\n          \"type\": 5442\n        }\n      ],\n      \"next\": {}\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a6d821c-4fff-478c-997f-55847758d23c",
+              "name": "Invalid query request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v0",
+                    "multiqueries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"queries\": [\n    {\n      \"streamId\": \"kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t\",\n      \"paths\": [\n        \"link\"\n      ]\n    },\n    {\n      \"streamId\": \"kjzl6cwe1jw14b9pq2o1bvmxzpbz8y3y6r5l9q3v2k7\",\n      \"paths\": []\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08e3c847-5ffc-419e-890e-c916316c7947",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v0",
+                    "multiqueries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"queries\": [\n    {\n      \"streamId\": \"kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t\",\n      \"paths\": [\n        \"link\"\n      ]\n    },\n    {\n      \"streamId\": \"kjzl6cwe1jw14b9pq2o1bvmxzpbz8y3y6r5l9q3v2k7\",\n      \"paths\": []\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.ceramic.network",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "36708eed-98ae-46a7-8b3d-2924983bc520",
+    "name": "Ceramic HTTP Commits Multiqueries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Low-level REST HTTP API for the Ceramic node (js-ceramic), providing the underlying transport for all Self.ID SDK operations. Exposes endpoints to create/load streams by StreamID or CommitID, batch-load streams via multiQuery, manage anchoring and pinning, and access the Data Feed for custom indexers.\n\nContact Support:\n Name: Ceramic Network",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ceramic HTTP Commits Multiqueries API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Multiqueries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Multi-Query Streams",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.ceramic.network/api/v0/multiqueries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch-loads multiple streams in a single request. Each query specifies a StreamID and optional paths to related streams to load simultaneously."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

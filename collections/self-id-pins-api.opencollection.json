@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ceramic HTTP Commits Pins API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Pin Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.ceramic.network/api/v0/pins/:streamId",
+            "params": [
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "The StreamID to check pin status for"
+              }
+            ]
+          },
+          "docs": "Retrieves the pinning status of a stream on the local Ceramic node."
+        },
+        {
+          "info": {
+            "name": "Pin Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.ceramic.network/api/v0/pins/:streamId",
+            "params": [
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "The StreamID to pin"
+              }
+            ]
+          },
+          "docs": "Pins a stream to the local Ceramic node, ensuring it is persistently stored and not garbage collected."
+        },
+        {
+          "info": {
+            "name": "Unpin Stream",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.ceramic.network/api/v0/pins/:streamId",
+            "params": [
+              {
+                "name": "streamId",
+                "value": "",
+                "type": "path",
+                "description": "The StreamID to unpin"
+              }
+            ]
+          },
+          "docs": "Removes the pin for a stream from the local Ceramic node, allowing it to be garbage collected."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
