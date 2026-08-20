@@ -39,6 +39,13 @@ apis:
   tags:
   - DID
   - Profile
+  - Read/Write
+  - Authentication
+  - Ethereum
+  - Ceramic
+  tags_raw:
+  - DID
+  - Profile
   - Read-Write
   - Authentication
   - Ethereum
