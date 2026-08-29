@@ -6,6 +6,17 @@ description: >-
   and enables reading and writing identity records such as basic profiles, linked crypto accounts,
   and linked Web2 accounts. The SDK is organized in layered packages (core, web, react, framework)
   targeting both Node.js and browser environments.
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: unknown
