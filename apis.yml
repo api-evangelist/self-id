@@ -50,7 +50,7 @@ apis:
   tags:
   - DID
   - Profile
-  - Read-Write
+  - Read/Write
   - Authentication
   - Ethereum
   - Ceramic
