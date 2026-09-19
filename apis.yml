@@ -49,7 +49,7 @@ apis:
   baseURL: https://ceramic-clay.3boxlabs.com
   tags:
   - DID
-  - Profile
+  - Profiles
   - Read/Write
   - Authentication
   - Ethereum
