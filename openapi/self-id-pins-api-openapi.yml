@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Ceramic HTTP Commits Pins API
+  title: Ceramic HTTP Pins API
   description: Low-level REST HTTP API for the Ceramic node (js-ceramic), providing the underlying transport for all Self.ID SDK operations. Exposes endpoints to create/load streams by StreamID or CommitID, batch-load streams via multiQuery, manage anchoring and pinning, and access the Data Feed for custom indexers.
   version: 0.1.0
   contact:
@@ -120,6 +120,22 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message
+    PinResponse:
+      type: object
+      properties:
+        streamId:
+          type: string
+          description: The StreamID that was pinned or unpinned
+          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
+        isPinned:
+          type: boolean
+          description: Whether the stream is now pinned
     PinStatusResponse:
       type: object
       properties:
@@ -132,19 +148,3 @@ components:
           description: List of pinned StreamIDs (contains the requested ID if pinned)
           items:
             type: string
-    PinResponse:
-      type: object
-      properties:
-        streamId:
-          type: string
-          description: The StreamID that was pinned or unpinned
-          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
-        isPinned:
-          type: boolean
-          description: Whether the stream is now pinned
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Human-readable error message

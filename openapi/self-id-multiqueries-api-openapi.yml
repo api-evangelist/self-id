@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Ceramic HTTP Commits Multiqueries API
+  title: Ceramic HTTP Multiqueries API
   description: Low-level REST HTTP API for the Ceramic node (js-ceramic), providing the underlying transport for all Self.ID SDK operations. Exposes endpoints to create/load streams by StreamID or CommitID, batch-load streams via multiQuery, manage anchoring and pinning, and access the Data Feed for custom indexers.
   version: 0.1.0
   contact:
@@ -93,11 +93,13 @@ components:
                   items:
                     type: string
                 schema:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 family:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
             signature:
               type: integer
               description: 'Signature status: 0=genesis unsigned, 1=genesis signed, 2=signed'
@@ -125,9 +127,20 @@ components:
                   type:
                     type: integer
             next:
-              type: object
-              nullable: true
+              type:
+              - object
+              - 'null'
               description: Pending content not yet anchored
+    MultiQueryRequest:
+      type: object
+      required:
+      - queries
+      properties:
+        queries:
+          type: array
+          description: Array of stream queries to execute in batch
+          items:
+            $ref: '#/components/schemas/StreamQuery'
     StreamQuery:
       type: object
       required:
@@ -153,13 +166,3 @@ components:
         error:
           type: string
           description: Human-readable error message
-    MultiQueryRequest:
-      type: object
-      required:
-      - queries
-      properties:
-        queries:
-          type: array
-          description: Array of stream queries to execute in batch
-          items:
-            $ref: '#/components/schemas/StreamQuery'

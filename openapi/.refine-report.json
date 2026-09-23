@@ -1,11 +1,7 @@
 {
   "provider": "self-id",
   "sources": [
-    "self-id-commits-api-openapi.yml",
-    "self-id-multiqueries-api-openapi.yml",
-    "self-id-node-api-openapi.yml",
-    "self-id-pins-api-openapi.yml",
-    "self-id-streams-api-openapi.yml"
+    "_original/ceramic-http-api.json"
   ],
   "outputs": [
     "self-id-commits-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ceramic-http-api.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "self-id-commits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "self-id-multiqueries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "self-id-node-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "self-id-pins-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "self-id-streams-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
