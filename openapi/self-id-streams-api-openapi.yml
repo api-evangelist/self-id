@@ -182,6 +182,26 @@ components:
               - object
               - 'null'
               description: Pending content not yet anchored
+    CreateStreamRequest:
+      type: object
+      required:
+      - type
+      - genesis
+      properties:
+        type:
+          type: integer
+          description: Stream type identifier (0 = TileDocument, 1 = CAIP-10Link, 3 = Model, 4 = ModelInstanceDocument)
+          example: 0
+        genesis:
+          $ref: '#/components/schemas/GenesisCommit'
+        opts:
+          $ref: '#/components/schemas/StreamOptions'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message
     CommitHeader:
       type: object
       properties:
@@ -203,26 +223,6 @@ components:
           description: Optional tags for categorizing the stream
           items:
             type: string
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Human-readable error message
-    CreateStreamRequest:
-      type: object
-      required:
-      - type
-      - genesis
-      properties:
-        type:
-          type: integer
-          description: Stream type identifier (0 = TileDocument, 1 = CAIP-10Link, 3 = Model, 4 = ModelInstanceDocument)
-          example: 0
-        genesis:
-          $ref: '#/components/schemas/GenesisCommit'
-        opts:
-          $ref: '#/components/schemas/StreamOptions'
     GenesisCommit:
       type: object
       properties:
