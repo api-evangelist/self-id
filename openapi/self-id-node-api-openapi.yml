@@ -61,12 +61,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Human-readable error message
     SupportedChainsResponse:
       type: object
       properties:
@@ -78,3 +72,9 @@ components:
           example:
           - eip155:1
           - eip155:5
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message

@@ -126,11 +126,16 @@ components:
               - object
               - 'null'
               description: Pending content not yet anchored
-    MultiQueryResponse:
+    MultiQueryRequest:
       type: object
-      description: Map of StreamID to stream state for all queried streams
-      additionalProperties:
-        $ref: '#/components/schemas/StreamState'
+      required:
+      - queries
+      properties:
+        queries:
+          type: array
+          description: Array of stream queries to execute in batch
+          items:
+            $ref: '#/components/schemas/StreamQuery'
     ErrorResponse:
       type: object
       properties:
@@ -156,13 +161,8 @@ components:
         atTime:
           type: integer
           description: Optional Unix timestamp to load stream state at a specific point in time
-    MultiQueryRequest:
+    MultiQueryResponse:
       type: object
-      required:
-      - queries
-      properties:
-        queries:
-          type: array
-          description: Array of stream queries to execute in batch
-          items:
-            $ref: '#/components/schemas/StreamQuery'
+      description: Map of StreamID to stream state for all queried streams
+      additionalProperties:
+        $ref: '#/components/schemas/StreamState'
