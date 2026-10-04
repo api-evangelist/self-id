@@ -95,6 +95,12 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message
     StreamState:
       type: object
       description: The current state of a Ceramic stream
@@ -162,12 +168,6 @@ components:
               - object
               - 'null'
               description: Pending content not yet anchored
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Human-readable error message
     GenesisCommit:
       type: object
       properties:
@@ -175,6 +175,26 @@ components:
           $ref: '#/components/schemas/CommitHeader'
         content:
           description: Initial content of the stream (stream-type dependent)
+    StreamOptions:
+      type: object
+      description: Optional stream operation configuration
+      properties:
+        anchor:
+          type: boolean
+          description: Whether to request an anchor for this commit
+          default: true
+        publish:
+          type: boolean
+          description: Whether to publish the commit to the Ceramic network
+          default: true
+        sync:
+          type: integer
+          description: 'Sync policy: 0=never, 1=prefer cache, 2=always sync'
+          enum:
+          - 0
+          - 1
+          - 2
+          default: 1
     CommitHeader:
       type: object
       properties:
@@ -196,26 +216,6 @@ components:
           description: Optional tags for categorizing the stream
           items:
             type: string
-    StreamOptions:
-      type: object
-      description: Optional stream operation configuration
-      properties:
-        anchor:
-          type: boolean
-          description: Whether to request an anchor for this commit
-          default: true
-        publish:
-          type: boolean
-          description: Whether to publish the commit to the Ceramic network
-          default: true
-        sync:
-          type: integer
-          description: 'Sync policy: 0=never, 1=prefer cache, 2=always sync'
-          enum:
-          - 0
-          - 1
-          - 2
-          default: 1
     CreateStreamRequest:
       type: object
       required:

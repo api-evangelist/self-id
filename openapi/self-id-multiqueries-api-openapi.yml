@@ -59,6 +59,22 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message
+    MultiQueryRequest:
+      type: object
+      required:
+      - queries
+      properties:
+        queries:
+          type: array
+          description: Array of stream queries to execute in batch
+          items:
+            $ref: '#/components/schemas/StreamQuery'
     StreamState:
       type: object
       description: The current state of a Ceramic stream
@@ -126,22 +142,11 @@ components:
               - object
               - 'null'
               description: Pending content not yet anchored
-    MultiQueryRequest:
+    MultiQueryResponse:
       type: object
-      required:
-      - queries
-      properties:
-        queries:
-          type: array
-          description: Array of stream queries to execute in batch
-          items:
-            $ref: '#/components/schemas/StreamQuery'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Human-readable error message
+      description: Map of StreamID to stream state for all queried streams
+      additionalProperties:
+        $ref: '#/components/schemas/StreamState'
     StreamQuery:
       type: object
       required:
@@ -161,8 +166,3 @@ components:
         atTime:
           type: integer
           description: Optional Unix timestamp to load stream state at a specific point in time
-    MultiQueryResponse:
-      type: object
-      description: Map of StreamID to stream state for all queried streams
-      additionalProperties:
-        $ref: '#/components/schemas/StreamState'

@@ -120,18 +120,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    PinStatusResponse:
-      type: object
-      properties:
-        streamId:
-          type: string
-          description: The StreamID
-          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
-        pinnedStreamIds:
-          type: array
-          description: List of pinned StreamIDs (contains the requested ID if pinned)
-          items:
-            type: string
     PinResponse:
       type: object
       properties:
@@ -148,3 +136,15 @@ components:
         error:
           type: string
           description: Human-readable error message
+    PinStatusResponse:
+      type: object
+      properties:
+        streamId:
+          type: string
+          description: The StreamID
+          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
+        pinnedStreamIds:
+          type: array
+          description: List of pinned StreamIDs (contains the requested ID if pinned)
+          items:
+            type: string
