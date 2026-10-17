@@ -95,12 +95,54 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    GenesisCommit:
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/CommitHeader'
+        content:
+          description: Initial content of the stream (stream-type dependent)
+    CreateStreamRequest:
+      type: object
+      required:
+      - type
+      - genesis
+      properties:
+        type:
+          type: integer
+          description: Stream type identifier (0 = TileDocument, 1 = CAIP-10Link, 3 = Model, 4 = ModelInstanceDocument)
+          example: 0
+        genesis:
+          $ref: '#/components/schemas/GenesisCommit'
+        opts:
+          $ref: '#/components/schemas/StreamOptions'
     ErrorResponse:
       type: object
       properties:
         error:
           type: string
           description: Human-readable error message
+    CommitHeader:
+      type: object
+      properties:
+        controllers:
+          type: array
+          description: DID or CAIP-10 account strings that control this stream
+          items:
+            type: string
+          example:
+          - did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK
+        family:
+          type: string
+          description: Optional schema family identifier for grouping streams
+        schema:
+          type: string
+          description: Optional CommitID of the schema stream to validate content against
+        tags:
+          type: array
+          description: Optional tags for categorizing the stream
+          items:
+            type: string
     StreamState:
       type: object
       description: The current state of a Ceramic stream
@@ -168,13 +210,6 @@ components:
               - object
               - 'null'
               description: Pending content not yet anchored
-    GenesisCommit:
-      type: object
-      properties:
-        header:
-          $ref: '#/components/schemas/CommitHeader'
-        content:
-          description: Initial content of the stream (stream-type dependent)
     StreamOptions:
       type: object
       description: Optional stream operation configuration
@@ -195,38 +230,3 @@ components:
           - 1
           - 2
           default: 1
-    CommitHeader:
-      type: object
-      properties:
-        controllers:
-          type: array
-          description: DID or CAIP-10 account strings that control this stream
-          items:
-            type: string
-          example:
-          - did:key:z6MkhaXgBZDvotDkL5257faiztiGiC2QtKLGpbnnEGta2doK
-        family:
-          type: string
-          description: Optional schema family identifier for grouping streams
-        schema:
-          type: string
-          description: Optional CommitID of the schema stream to validate content against
-        tags:
-          type: array
-          description: Optional tags for categorizing the stream
-          items:
-            type: string
-    CreateStreamRequest:
-      type: object
-      required:
-      - type
-      - genesis
-      properties:
-        type:
-          type: integer
-          description: Stream type identifier (0 = TileDocument, 1 = CAIP-10Link, 3 = Model, 4 = ModelInstanceDocument)
-          example: 0
-        genesis:
-          $ref: '#/components/schemas/GenesisCommit'
-        opts:
-          $ref: '#/components/schemas/StreamOptions'

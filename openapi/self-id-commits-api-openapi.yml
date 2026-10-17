@@ -97,12 +97,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Human-readable error message
     CommitListResponse:
       type: object
       properties:
@@ -122,6 +116,31 @@ components:
               value:
                 type: object
                 description: The raw commit payload
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message
+    ApplyCommitRequest:
+      type: object
+      required:
+      - streamId
+      - commit
+      properties:
+        streamId:
+          type: string
+          description: The StreamID of the stream to update
+          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
+        commit:
+          type: object
+          description: The signed commit object (JWS or CACAO-signed DAG-JOSE object)
+          properties:
+            value:
+              type: object
+              description: The commit payload (header + content delta)
+        opts:
+          $ref: '#/components/schemas/StreamOptions'
     StreamState:
       type: object
       description: The current state of a Ceramic stream
@@ -209,22 +228,3 @@ components:
           - 1
           - 2
           default: 1
-    ApplyCommitRequest:
-      type: object
-      required:
-      - streamId
-      - commit
-      properties:
-        streamId:
-          type: string
-          description: The StreamID of the stream to update
-          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
-        commit:
-          type: object
-          description: The signed commit object (JWS or CACAO-signed DAG-JOSE object)
-          properties:
-            value:
-              type: object
-              description: The commit payload (header + content delta)
-        opts:
-          $ref: '#/components/schemas/StreamOptions'

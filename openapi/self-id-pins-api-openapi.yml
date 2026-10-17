@@ -130,12 +130,6 @@ components:
         isPinned:
           type: boolean
           description: Whether the stream is now pinned
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Human-readable error message
     PinStatusResponse:
       type: object
       properties:
@@ -148,3 +142,9 @@ components:
           description: List of pinned StreamIDs (contains the requested ID if pinned)
           items:
             type: string
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message

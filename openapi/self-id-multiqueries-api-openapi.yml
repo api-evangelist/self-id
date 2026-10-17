@@ -59,12 +59,30 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
+    StreamQuery:
       type: object
+      required:
+      - streamId
       properties:
-        error:
+        streamId:
           type: string
-          description: Human-readable error message
+          description: The StreamID to load
+          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
+        paths:
+          type: array
+          description: Optional paths to related streams to load in the same query
+          items:
+            type: string
+          example:
+          - link
+        atTime:
+          type: integer
+          description: Optional Unix timestamp to load stream state at a specific point in time
+    MultiQueryResponse:
+      type: object
+      description: Map of StreamID to stream state for all queried streams
+      additionalProperties:
+        $ref: '#/components/schemas/StreamState'
     MultiQueryRequest:
       type: object
       required:
@@ -75,6 +93,12 @@ components:
           description: Array of stream queries to execute in batch
           items:
             $ref: '#/components/schemas/StreamQuery'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message
     StreamState:
       type: object
       description: The current state of a Ceramic stream
@@ -142,27 +166,3 @@ components:
               - object
               - 'null'
               description: Pending content not yet anchored
-    MultiQueryResponse:
-      type: object
-      description: Map of StreamID to stream state for all queried streams
-      additionalProperties:
-        $ref: '#/components/schemas/StreamState'
-    StreamQuery:
-      type: object
-      required:
-      - streamId
-      properties:
-        streamId:
-          type: string
-          description: The StreamID to load
-          example: kjzl6cwe1jw147ww5d8pswh1hjh686257r81ifgom1bou37r6vgdmk7jtnka91t
-        paths:
-          type: array
-          description: Optional paths to related streams to load in the same query
-          items:
-            type: string
-          example:
-          - link
-        atTime:
-          type: integer
-          description: Optional Unix timestamp to load stream state at a specific point in time
