@@ -64,59 +64,117 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-APIs.json 0.19 provider profile for Self.ID — a Ceramic-based decentralized identity framework.
+Self.ID is a Ceramic-based decentralized identity framework providing SDK packages and REST-compatible APIs for managing DID profiles, verifiable credentials, and self-sovereign identity data on the Ceramic network. It supports Ethereum-based authentication via 3ID Connect and enables reading and writing identity records such as basic profiles, linked crypto accounts, and linked Web2 accounts. The SDK is organized in layered packages (core, web, react, framework) targeting both Node.js and browser environments.
 
-## Overview
+**Areas:** Decentralized Identity · DID · Ceramic · Self-Sovereign Identity · Web3 · Verifiable Credentials · Blockchain
 
-Self.ID is an open-source SDK and reference application for building self-sovereign identity
-applications on the [Ceramic network](https://ceramic.network). It enables developers to manage
-DID profiles, verifiable credentials, and identity records using Ethereum-based authentication
-and composable, user-centric data storage.
+## Self.ID on APIs.io
 
-**Homepage:** https://self.id  
-**GitHub:** https://github.com/ceramicstudio/self.id  
-**Documentation:** https://developers.ceramic.network/tools/self-id/overview/
+Everything profiled for Self.ID is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/self-id/](https://apis.io/providers/self-id/)** — or go straight to one of the APIs or properties below.
 
-## APIs Cataloged
+### APIs (8)
 
-| API | Description |
-|-----|-------------|
-| Self.ID Core API | Read public DID records (Node + browser) via `@self.id/core` |
-| Self.ID Web API | Read/write DID records in browsers via `@self.id/web` + 3ID Connect |
-| Self.ID React API | React hooks for DID auth and record interactions via `@self.id/react` |
-| Self.ID Framework API | High-level React framework via `@self.id/framework` |
-| Ceramic HTTP API | Underlying REST transport for streams and DID data on Ceramic nodes |
+- [Self.ID Web API](https://apis.io/apis/self-id/selfid-web-api/) — Read and write DID identity records in browser environments. Exports WebClient and SelfID classes enabling Ethereum-based authentication via 3ID Connect,…
+- [Self.ID React API](https://apis.io/apis/self-id/selfid-react-api/) — React hooks and utilities for Ceramic-based DID authentication and record interactions. Provides useViewerRecord, usePublicRecord, useViewerConnection, and…
+- [Self.ID Framework API](https://apis.io/apis/self-id/selfid-framework-api/) — Highest-level React framework abstraction for decentralized identity apps built on Ceramic. Wraps the core, web, and react packages into a single Provider +…
+- [Self.ID Commits API](https://apis.io/apis/self-id/self-id-commits-api/) — Apply commits to existing streams and retrieve stream commit history
+- [Self.ID Multiqueries API](https://apis.io/apis/self-id/self-id-multiqueries-api/) — Batch-load multiple streams in a single request
+- [Self.ID Node API](https://apis.io/apis/self-id/self-id-node-api/) — Node health and configuration information
+- [Self.ID Pins API](https://apis.io/apis/self-id/self-id-pins-api/) — Manage persistent pinning of streams on the local node
+- [Self.ID Streams API](https://apis.io/apis/self-id/self-id-streams-api/) — Create and load Ceramic streams by StreamID or CommitID
 
-## Key Concepts
+### Published properties
 
-- **DID (Decentralized Identifier):** Cryptographic identifier for a user, not controlled by any
-  central authority. Ceramic uses `did:3` and `did:pkh` methods.
-- **Streams:** Hash-linked chains of events on Ceramic for storing mutable JSON data (profiles,
-  credentials, etc.).
-- **3ID Connect:** Browser wallet integration enabling Ethereum-based DID authentication.
-- **Data Models:** Pre-configured schemas for `basicProfile`, `cryptoAccounts`, and `alsoKnownAs`.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Ceramic Network Endpoints
+#### Agentic access (1)
 
-| Network | URL |
-|---------|-----|
-| Mainnet gateway (read-only) | https://gateway.ceramic.network |
-| Clay testnet (read/write) | https://ceramic-clay.3boxlabs.com |
-| Clay testnet gateway (read-only) | https://gateway-clay.ceramic.network |
-| Local node | http://localhost:7007 |
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Plans & Pricing
+- [Self Id Agentic Access](https://apis.io/agentic-access/self-id/self-id-agentic-access/)
 
-Self.ID is fully open-source (MIT/Apache 2). There are no subscription fees. Costs arise from
-infrastructure (hosting a Ceramic node) and blockchain anchor transactions on Ethereum mainnet.
-See [plans/plans.yml](plans/plans.yml) and [finops/finops.yml](finops/finops.yml) for details.
+#### JSON Schema (3)
 
-## Rate Limits
+The data models the API reads and writes.
 
-No formal rate limits are published. Community gateway nodes may apply undocumented throttling.
-See [rate-limits/rate-limits.yml](rate-limits/rate-limits.yml) for known constraints.
+- [AlsoKnownAs](https://apis.io/schemas/self-id/also-known-as/)
+- [BasicProfile](https://apis.io/schemas/self-id/basic-profile/)
+- [CryptoAccounts](https://apis.io/schemas/self-id/crypto-accounts/)
 
-## Maintainer
+#### JSON-LD (1)
 
-Cataloged by [API Evangelist](https://apievangelist.com).  
-Original project maintained by [Ceramic Studio / 3Box Labs](https://ceramic.network).
+Linked-data contexts for the provider's vocabulary.
+
+- [Self Id Context](https://apis.io/jsonld/self-id/self-id-context/)
+
+#### Examples (3)
+
+Example requests and responses.
+
+- [Basic Profile Example](https://apis.io/examples/self-id/basic-profile-example/)
+- [Create Stream Request](https://apis.io/examples/self-id/create-stream-request/)
+- [Multiquery Request](https://apis.io/examples/self-id/multiquery-request/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [Ceramic HTTP Commits API](https://apis.io/collections/self-id/open-self-id-commits-api/)
+- [Ceramic HTTP Commits Multiqueries API](https://apis.io/collections/self-id/open-self-id-multiqueries-api/)
+- [Ceramic HTTP Commits Node API](https://apis.io/collections/self-id/open-self-id-node-api/)
+- [Ceramic HTTP Commits Pins API](https://apis.io/collections/self-id/open-self-id-pins-api/)
+- [Ceramic HTTP Commits Streams API](https://apis.io/collections/self-id/open-self-id-streams-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Self.ID — jsonschema rules](https://apis.io/rules/self-id/self-id-jsonschema-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Self Id Domain Security](https://apis.io/security/self-id/self-id-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/self-id/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/self-id/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/self-id/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Blog](https://blog.ceramic.network/feed/)
+
+## API Evangelist rating
+
+**Unrated** — no public website could be reached for this company, so there was almost nothing to measure and nothing a reader could check.
+
+This is not a score of zero. No rating is published for this company. If that is wrong because something public exists that we missed, say so on this repository or email [info@apievangelist.com](mailto:info@apievangelist.com) and it will be re-run — free, and no justification needed.
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Self.ID: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/self-id/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
